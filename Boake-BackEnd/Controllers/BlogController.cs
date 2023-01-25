@@ -1,11 +1,13 @@
 ﻿using Boake_BackEnd.DAL;
 using Boake_BackEnd.Models;
+using Boake_BackEnd.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -39,15 +41,27 @@ namespace Boake_BackEnd.Controllers
             ViewBag.Bio = _context.Bio.FirstOrDefault();
             ViewBag.Tags = _context.Tags.Where(b => !b.IsDeleted).ToList();
 
-            ViewBag.Blogs= _context.Blog.Where(b => !b.IsDeleted ).Take(5).ToList();
+            List<Blog> blogs= _context.Blog.Where(b => !b.IsDeleted ).ToList();
             Blog blog =await _context.Blog.Include(b=>b.BlogTags).ThenInclude(b=>b.Tag).FirstOrDefaultAsync(b => !b.IsDeleted &&b.Id==id);
-            return View(blog);
+            BlogVM blogVM = new BlogVM()
+            {
+                Blog=blog,
+                Blogs=blogs
+            };
+            return View(blogVM);
         }
         public IActionResult Blogtag(int id)
         {
             List<Blog> blogs = _context.Blog.Include(b => b.Comments).Where(c =>!c.IsDeleted && c.BlogTags.Any(bt => bt.TagId == id)).ToList();
             ViewBag.Tags = _context.Tags.Where(b => !b.IsDeleted).ToList();
-            return View(blogs);
+            List<Blog> blogsfortag = _context.Blog.Where(b => !b.IsDeleted).ToList();
+
+            BlogVM blogVM = new BlogVM()
+            { 
+                Blogs = blogs,
+                BlogsForTag=blogsfortag
+            };
+            return View(blogVM);
         }
         [AutoValidateAntiforgeryToken]
         [HttpPost]
@@ -69,7 +83,6 @@ namespace Boake_BackEnd.Controllers
             _context.SaveChanges();
             return RedirectToAction("Detail", "Blog", new { id = comment.BlogId });
         }
-
         public async Task<IActionResult> DeleteComment(int id)
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -92,6 +105,5 @@ namespace Boake_BackEnd.Controllers
             _context.SaveChanges();
             return RedirectToAction("Detail", "Blog", new { id = comment.BlogId });
         }
-
     }
 }

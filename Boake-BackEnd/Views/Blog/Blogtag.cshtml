@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blog>
+﻿@model BlogVM
 
 @{
     ViewData["Title"] = "Blogtag";
@@ -21,7 +21,7 @@
         <div class="row flex-row-reverse">
             <div class="col-lg-9">
                 <div class="row">
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Blogs)
                     {
 
                         <div class="col-lg-6 col-12">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="sidebar-widget my-5">
                         <h4 class="geometric ls-1 text-white">Recent Post</h4>
-                        @foreach (var blog in Model.TakeLast(3))
+                        @foreach (var blog in Model.BlogsForTag.TakeLast(3))
                         {
 
                             <div class="single-sidebar-blog mt-4">
@@ -105,9 +105,9 @@
                     </div>
                     <div class="sidebar-widget mt-5">
                         <h4 class="geometric ls-1 text-white">Archive</h4>
-                        <h5 class="text-white pt-3 pb-2">March 2022</h5>
+                        <h5 class="text-white pt-3 pb-2">@DateTime.Now.ToString("MMMM yyyy")</h5>
                         <ul class="archive-sidebar list-unstyled">
-                            @foreach (var itee in Model)
+                            @foreach (var itee in Model.BlogsForTag.Where(b => b.CreatedTime.Month == DateTime.Now.Month).TakeLast(5))
                             {
 
                                 <li>

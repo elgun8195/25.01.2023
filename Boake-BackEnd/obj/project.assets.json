@@ -8973,11 +8973,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\Desktop\\ONLY GITHUB PROJECTS !!!\\HHHHHHHHHHHHHHH\\Panel-For-Boake\\Boake-BackEnd\\Boake-BackEnd.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Desktop\\son\\Panel-For-Boake\\Boake-BackEnd\\Boake-BackEnd.csproj",
       "projectName": "Boake-BackEnd",
-      "projectPath": "C:\\Users\\hp\\Desktop\\ONLY GITHUB PROJECTS !!!\\HHHHHHHHHHHHHHH\\Panel-For-Boake\\Boake-BackEnd\\Boake-BackEnd.csproj",
+      "projectPath": "C:\\Users\\hp\\Desktop\\son\\Panel-For-Boake\\Boake-BackEnd\\Boake-BackEnd.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\Desktop\\ONLY GITHUB PROJECTS !!!\\HHHHHHHHHHHHHHH\\Panel-For-Boake\\Boake-BackEnd\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Desktop\\son\\Panel-For-Boake\\Boake-BackEnd\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
